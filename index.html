@@ -5,16 +5,30 @@
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>yt</title>
+  <link rel="stylesheet" href="css/style.css">
+
 </head>
 <body>
 
 <div id="player"></div>
 
-<nav>
-  <div></div>
-  <button class="yt-player__toggle">play</button>
-</nav>
+<div class="yt-player yt-player--live">
+  <div class="yt-player__progress">
+    <div class="yt-player__bar"></div>
+  </div>
 
+  <button class="yt-player__toggle"></button>
+
+  <div class="yt-player__duration"></div>
+  <div class="yt-player__position"></div>
+
+  <div class="yt-player__live">
+    <span class="yt-player__live-icon"></span>
+    <span class="yt-player__live-title">Live</span>
+  </div>
+  <div class="yt-player__mute"></div>
+
+</div>
 <script src="js/script.js"></script>
 </body>
 </html>

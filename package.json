@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "serve": "npx live-server",
+    "css": "npx sass scss/style.scss:css/style.css -w"
   },
   "repository": {
     "type": "git",

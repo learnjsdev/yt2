@@ -1,0 +1,12 @@
+@mixin upd-font($type) {
+  @each $key, $prop in $type {
+    #{$key}: #{$prop};
+  }
+}
+
+@mixin icon($icon-name: '', $icon-color-base: white, $icon-color-hover: '') {
+  @extend .i;
+  @extend .icon-#{$icon-name};
+  color: $icon-color-base;
+}
+
