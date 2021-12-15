@@ -17,6 +17,7 @@
   flex-wrap: wrap;
   background-color: #212B36;
   color: #FFF;
+  position: relative;
 }
 .yt-player__progress {
   min-height: 4px;

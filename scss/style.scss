@@ -22,6 +22,7 @@
   //width: 100%;
   background-color: $color--black-primary;
   color: $color--white;
+  position: relative;
 
   &__progress {
     min-height: 4px;

@@ -5,6 +5,8 @@ class YTAudio {
     progressBarSelector = '.yt-player__bar',
     positionSelector = '.yt-player__position',
     muteSelector = '.yt-player__mute',
+    volumeSelector = '.yt-player__volume',
+    volumeKnobSelector = '.yt-player__volume-knob',
   }) {
     this._onPlayerReady = this._onPlayerReady.bind(this);
     this._addEvents = this._addEvents.bind(this);
@@ -24,6 +26,14 @@ class YTAudio {
     this.progressBarSelector = progressBarSelector;
     this.positionSelector = positionSelector;
     this.muteSelector = muteSelector;
+    this.volumeSelector = volumeSelector;
+    this.volumeKnobSelector = volumeKnobSelector;
+
+    this._barElem = document.querySelector(this.progressBarSelector);
+    this._positionElem = document.querySelector(this.positionSelector);
+    this._togglePlayBtn = document.querySelector(this.toggleBtnSelector);
+    this._volumeSelector = document.querySelector(this.volumeSelector);
+    this._volumeKnobSelector = document.querySelector(this.volumeKnobSelector);
 
     this._intervalId;
     this._duration = 0;
@@ -31,17 +41,14 @@ class YTAudio {
 
   _updateTime() {
     const currentTime = this._player.getCurrentTime();
-    const duration = this._player.getDuration();
-    const percents = this._getPercents(currentTime, duration);
-    const barElem = document.querySelector(this.progressBarSelector);
-    const positionElem = document.querySelector(this.positionSelector);
+    const percents = this._getPercents(currentTime, this._duration);
 
-    barElem.style.cssText = `width: ${ percents }%`;
-    positionElem.textContent = this._convertToTime(currentTime * 1000);
+    this._barElem.style.cssText = `width: ${ percents }%`;
+    this._positionElem.textContent = `${ this._convertToTime(currentTime * 1000) } / ${ this._convertToTime(this._duration) }`;
   }
 
   _getPercents(currentTime = 0, duration = 0) {
-    return (currentTime * 100) / duration
+    return ((currentTime / duration) * 1000 * 100);
   }
 
   _convertToTime(ms) {
@@ -60,9 +67,8 @@ class YTAudio {
 
   _onPlayerReady(event) {
     if (event.data === null) {
-      this._player.seekTo(0);
-      this._player.stopVideo();
-      this._duration = this._player.getDuration();
+      this._duration = this._player.getDuration() * 1000;
+      this._positionElem.textContent = this._convertToTime(0);
     }
   }
 
@@ -74,43 +80,39 @@ class YTAudio {
     const togglePlayBtn = e.target.closest(this.toggleBtnSelector);
     const progressElem = e.target.closest(this.progressSelector);
     const muteBtn = e.target.closest(this.muteSelector);
+    const state = this._player.getPlayerState();
 
     if (togglePlayBtn) {
-      const state = this._player.getPlayerState();
-
       if (state === this._states.IS_INLINE || state === this._states.IS_PAUSED) {
+        togglePlayBtn.classList.add('is-running');
         this._player.playVideo();
         this._intervalId = setInterval(this._updateTime.bind(this), 1000);
-        togglePlayBtn.classList.add('is-running');
       }
 
       if (state === this._states.IS_PLAYING) {
-        this._player.pauseVideo();
-        clearInterval(this._intervalId);
         togglePlayBtn.classList.remove('is-running');
-        console.log('cleared');
+        clearInterval(this._intervalId);
+        this._player.pauseVideo();
       }
-
-      console.log('==>', state)
     }
 
     if (progressElem) {
-      const barElem = document.querySelector(this.progressBarSelector);
-      const positionElem = document.querySelector(this.positionSelector);
-
       const rect = progressElem.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const percents = 100 * (x / rect.width);
-      const ms = this._duration * 1000;
+      const ms = this._duration;
       const position = ms * (percents / 100);
-      positionElem.textContent = this._convertToTime(position);
 
-      console.log(percents/100);
+      clearTimeout(this._intervalId);
+      this._player.seekTo(position / 1000);
+      this._intervalId = setInterval(this._updateTime.bind(this), 1000);
 
-      barElem.style.cssText = `width: ${ percents }%`;
+      this._positionElem.textContent = `${ this._convertToTime(position) } / ${ this._convertToTime(this._duration) }`;
+      this._barElem.style.cssText = `width: ${ percents }%`;
 
-      this._player.seekTo(position/1000);
-      
+      if (state === this._states.IS_INLINE) {
+        this._togglePlayBtn.classList.add('is-running');
+      }
     }
 
     if (muteBtn) {
@@ -125,7 +127,7 @@ class YTAudio {
   }
 
   _addEvents() {
-    document.addEventListener('click', this._handleClick.bind(this))
+    document.addEventListener('click', this._handleClick.bind(this));
   }
 
   _init() {
@@ -147,6 +149,8 @@ class YTAudio {
             onStateChange: this._onPlayerStateChange
           }
         });
+
+        window.player_debug = this._player;
       });
     }
 
