@@ -5,13 +5,13 @@ class YTAudio {
     progressBarSelector = '.yt-player__bar',
     positionSelector = '.yt-player__position',
     muteSelector = '.yt-player__mute',
-    volumeSelector = '.yt-player__volume',
-    volumeKnobSelector = '.yt-player__volume-knob',
+    prefix = 'yt-player',
+    el = 'player',
   }) {
     this._onPlayerReady = this._onPlayerReady.bind(this);
     this._addEvents = this._addEvents.bind(this);
     this._handleClick = this._handleClick.bind(this);
-    this._init();
+    this._init = this._init.bind(this);
 
     this._states = {
       IS_NOT_STARTED: -1,
@@ -26,17 +26,15 @@ class YTAudio {
     this.progressBarSelector = progressBarSelector;
     this.positionSelector = positionSelector;
     this.muteSelector = muteSelector;
-    this.volumeSelector = volumeSelector;
-    this.volumeKnobSelector = volumeKnobSelector;
 
     this._barElem = document.querySelector(this.progressBarSelector);
     this._positionElem = document.querySelector(this.positionSelector);
     this._togglePlayBtn = document.querySelector(this.toggleBtnSelector);
-    this._volumeSelector = document.querySelector(this.volumeSelector);
-    this._volumeKnobSelector = document.querySelector(this.volumeKnobSelector);
 
     this._intervalId;
     this._duration = 0;
+
+    this._init();
   }
 
   _updateTime() {
@@ -62,19 +60,23 @@ class YTAudio {
     min = (min < 10) ? "0" + min : min;
     sec = (sec < 10) ? "0" + sec : sec;
 
-    return `${ hours }${ delim }${ min }${ delim }${ sec }`;
+    if(!hours) {
+      return `${ hours }${ delim }${ min }${ delim }${ sec }`;
+    } else {
+      return `${ min }${ delim }${ sec }`;
+    }
   }
 
   _onPlayerReady(event) {
     if (event.data === null) {
       this._duration = this._player.getDuration() * 1000;
       this._positionElem.textContent = this._convertToTime(0);
+      this._player.playVideoAt(0);
+      console.log(this._duration);
     }
   }
 
-  _onPlayerStateChange(event) {
-    console.log('state', event.data);
-  }
+  _onPlayerStateChange(event) {}
 
   _handleClick(e) {
     const togglePlayBtn = e.target.closest(this.toggleBtnSelector);
@@ -140,17 +142,15 @@ class YTAudio {
         this._player = new window.YT.Player("player", {
           height: "390",
           width: "640",
-          videoId: "M7lc1UVf-VE",
+          videoId: document.getElementById('player').dataset.id,
           playerVars: {
-            //controls: 2
+            controls: 2
           },
           events: {
             onReady: this._onPlayerReady,
             onStateChange: this._onPlayerStateChange
           }
         });
-
-        window.player_debug = this._player;
       });
     }
 

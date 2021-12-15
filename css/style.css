@@ -1,3 +1,7 @@
+#player {
+  overflow: hidden;
+}
+
 .yt-player__live-icon, .yt-player__mute, .yt-player__toggle {
   display: flex;
   min-width: 16px;
@@ -9,6 +13,9 @@
   background-position: center;
   background-repeat: no-repeat;
   padding: 0;
+}
+.yt-player__live-icon:focus, .yt-player__mute:focus, .yt-player__toggle:focus {
+  outline: none;
 }
 
 .yt-player {

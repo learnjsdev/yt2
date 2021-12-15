@@ -2,6 +2,12 @@
 @import "ds/typography";
 @import "ds/colors";
 
+#player {
+  overflow: hidden;
+  //height: 0;
+  //width: 0;
+}
+
 %yt-player-icon {
   display: flex;
   min-width: 16px;
@@ -13,13 +19,16 @@
   background-position: center;
   background-repeat: no-repeat;
   padding: 0;
+
+  &:focus {
+    outline: none;
+  }
 }
 
 .yt-player {
   padding: 12px 12px 12px 12px;
   display: flex;
   flex-wrap: wrap;
-  //width: 100%;
   background-color: $color--black-primary;
   color: $color--white;
   position: relative;
