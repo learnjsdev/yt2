@@ -5,8 +5,6 @@ class YTAudio {
     progressBarSelector = '.yt-player__bar',
     positionSelector = '.yt-player__position',
     muteSelector = '.yt-player__mute',
-    prefix = 'yt-player',
-    el = 'player',
   }) {
     this._onPlayerReady = this._onPlayerReady.bind(this);
     this._addEvents = this._addEvents.bind(this);
@@ -140,8 +138,8 @@ class YTAudio {
     script.onload = () => {
       window.YT.ready(() => {
         this._player = new window.YT.Player("player", {
-          height: "390",
-          width: "640",
+          height: "0",
+          width: "0",
           videoId: document.getElementById('player').dataset.id,
           playerVars: {
             controls: 2
