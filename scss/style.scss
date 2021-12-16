@@ -35,6 +35,7 @@
   background-color: $color--black-primary;
   color: $color--white;
   position: relative;
+  box-sizing: border-box;
 
   &__progress {
     min-height: 4px;

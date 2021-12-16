@@ -27,6 +27,7 @@
   background-color: #212B36;
   color: #FFF;
   position: relative;
+  box-sizing: border-box;
 }
 .yt-player__progress {
   min-height: 4px;
