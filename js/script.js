@@ -138,8 +138,8 @@ class YTAudio {
     script.onload = () => {
       window.YT.ready(() => {
         this._player = new window.YT.Player("player", {
-          height: "240",
-          width: "480",
+          height: "1",
+          width: "1",
           videoId: document.getElementById('player').dataset.id,
           playerVars: {
             //controls: 2,

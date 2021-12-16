@@ -4,6 +4,9 @@
 
 #player {
   overflow: hidden;
+  position: fixed;
+  transform: translateY(-200%);
+
   //height: 0;
   //width: 0;
 }

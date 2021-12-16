@@ -1,5 +1,7 @@
 #player {
   overflow: hidden;
+  position: fixed;
+  transform: translateY(-200%);
 }
 
 .yt-player__live-icon, .yt-player__mute, .yt-player__toggle {
