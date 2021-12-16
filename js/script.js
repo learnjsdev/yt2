@@ -69,8 +69,8 @@ class YTAudio {
     if (event.data === null) {
       this._duration = this._player.getDuration() * 1000;
       this._positionElem.textContent = this._convertToTime(0);
-      this._player.playVideoAt(0);
-      console.log(this._duration);
+      //this._player.playVideoAt(0);
+      //console.log(this._duration);
     }
   }
 
@@ -138,11 +138,12 @@ class YTAudio {
     script.onload = () => {
       window.YT.ready(() => {
         this._player = new window.YT.Player("player", {
-          height: "0",
-          width: "0",
+          height: "240",
+          width: "480",
           videoId: document.getElementById('player').dataset.id,
           playerVars: {
-            controls: 2
+            //controls: 2,
+            //disablekb: 1
           },
           events: {
             onReady: this._onPlayerReady,
