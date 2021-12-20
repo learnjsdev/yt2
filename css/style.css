@@ -80,6 +80,10 @@
   pointer-events: none;
   margin-left: 0;
 }
+.is-volume-shown .yt-player__mute:not(.is-muted) ~ .yt-player__volume {
+  width: 100px;
+  overflow: visible;
+}
 .yt-player__live {
   display: flex;
   align-items: center;
@@ -104,12 +108,13 @@
 }
 .yt-player__volume {
   -webkit-appearance: none;
-  width: 100px;
   height: 4px;
   border-radius: 4px;
   margin: 6px 0 0 0;
   margin-left: 8px;
   transition: width 0.2s ease;
+  width: 0;
+  overflow: hidden;
 }
 .yt-player__volume::-webkit-slider-thumb {
   -webkit-appearance: none;

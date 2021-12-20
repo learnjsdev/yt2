@@ -91,6 +91,15 @@
         margin-left: 0;
       }
     }
+
+    .is-volume-shown & {
+       &:not(.is-muted) {
+         ~ .yt-player__volume {
+           width: 100px;
+           overflow: visible;
+         }
+       }
+    }
   }
 
   &__live {
@@ -131,13 +140,16 @@
     $track-radius: 4px;
 
     -webkit-appearance: none;
-    width: 100px;
+    //width: 100px;
     height: $track-height;
     border-radius: 4px;
     margin: #{$track-height + 2}  0 0 0;
     margin-left: 8px;
     transition: width .2s ease;
-    
+    width: 0;
+    overflow: hidden;
+
+
     &::-webkit-slider-thumb {
       -webkit-appearance: none;
     }

@@ -5,12 +5,12 @@ class YTAudio {
     progressBarSelector = '.yt-player__bar',
     positionSelector = '.yt-player__position',
     volumeSelector = '.yt-player__volume',
+    volumeWrapSelector = '.yt-player__volume-wr',
     muteSelector = '.yt-player__mute',
   }) {
     this._onPlayerReady = this._onPlayerReady.bind(this);
     this._addEvents = this._addEvents.bind(this);
     this._handleClick = this._handleClick.bind(this);
-    this._handleInput = this._handleInput.bind(this);
     this._init = this._init.bind(this);
 
     this._states = {
@@ -26,12 +26,14 @@ class YTAudio {
     this.progressBarSelector = progressBarSelector;
     this.positionSelector = positionSelector;
     this.volumeSelector = volumeSelector;
+    this.volumeWrapSelector = volumeWrapSelector;
     this.muteSelector = muteSelector;
 
     this._barElem = document.querySelector(this.progressBarSelector);
     this._positionElem = document.querySelector(this.positionSelector);
     this._togglePlayBtn = document.querySelector(this.toggleBtnSelector);
     this._volumeElem = document.querySelector(this.volumeSelector);
+    this._volumeWrapElem = document.querySelector(this.volumeWrapSelector);
 
     this._intervalId;
     this._duration = 0;
@@ -76,8 +78,7 @@ class YTAudio {
     }
   }
 
-  _onPlayerStateChange(event) {
-  }
+  _onPlayerStateChange(event) {}
 
   _drawInputBg(input) {
     const beforeBg = '#FFF';
@@ -86,7 +87,7 @@ class YTAudio {
     const max = input.getAttribute('max');
     const value = input.value;
     const perc = parseInt((value - min) / (max - min) * 100, 10);
-    input.style.cssText = `background: linear-gradient(to right, ${beforeBg}, ${beforeBg} ${perc}%, ${afterBg} ${perc}%, ${afterBg} 100%)`;
+    input.style.cssText = `background: linear-gradient(to right, ${ beforeBg }, ${ beforeBg } ${ perc }%, ${ afterBg } ${ perc }%, ${ afterBg } 100%)`;
   }
 
   _handleInput(e) {
@@ -147,9 +148,19 @@ class YTAudio {
     }
   }
 
+  _handleMouseEnter(e) {
+    this._volumeWrapElem.classList.add('is-volume-shown');
+  }
+
+  _handleMouseLeave(e) {
+    this._volumeWrapElem.classList.remove('is-volume-shown');
+  }
+
   _addEvents() {
     document.addEventListener('click', this._handleClick.bind(this));
     document.addEventListener('input', this._handleInput.bind(this));
+    this._volumeWrapElem.addEventListener('mouseenter', this._handleMouseEnter.bind(this));
+    this._volumeWrapElem.addEventListener('mouseleave', this._handleMouseLeave.bind(this));
   }
 
   _init() {
@@ -163,10 +174,7 @@ class YTAudio {
           height: "1",
           width: "1",
           videoId: document.getElementById('player').dataset.id,
-          playerVars: {
-            //controls: 2,
-            //disablekb: 1
-          },
+          playerVars: {},
           events: {
             onReady: this._onPlayerReady,
             onStateChange: this._onPlayerStateChange
@@ -176,6 +184,7 @@ class YTAudio {
     }
 
     this._addEvents();
+
     if (this._volumeElem) {
       this._drawInputBg(this._volumeElem);
       const event = new Event('input');
