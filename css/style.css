@@ -74,6 +74,12 @@
 .yt-player__mute.is-muted {
   background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEiIGhlaWdodD0iMjEiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik02LjY4MSA2Ljk4Yy4xNzMtLjE2NiA0Ljg5My0zLjkwNCA0Ljk3NS0zLjk0YS41MTcuNTE3IDAgMCAxIC40MDMuMDAyLjQ4LjQ4IDAgMCAxIC4yODUuMjY0Yy4wNTUuMTEuMDU4LjI2LjA1OCA0LjgydjQuNzA4TDkuNTA3IDkuOTM5IDYuNjEyIDcuMDQ0bC4wNy0uMDY0Wm0tNS42NC0yLjUzYS41NTUuNTU1IDAgMCAxIC4yNzgtLjY1MS40OTMuNDkzIDAgMCAxIC40NjQtLjAwNmMuMTczLjA4MiAxMy44NDEgMTMuODE1IDEzLjkwOCAxMy45NzNhLjQ5Ni40OTYgMCAwIDEtLjAxOS40NDNjLS4xMDkuMjIxLS4zMzMuMzMzLS41OTcuMjk0LS4xNC0uMDE4LS4xNjMtLjA0My0xLjM4My0xLjI2bC0uMDAyLS4wMDFhNTIuMDA1IDUyLjAwNSAwIDAgMC0xLjI2Ny0xLjI0Yy0uMDEyIDAtLjAyMS40Ny0uMDIxIDEuMDQ2IDAgLjk3LS4wMDMgMS4wNTgtLjA1OCAxLjE2YS40OC40OCAwIDAgMS0uMjg1LjI2NS40OTcuNDk3IDAgMCAxLS40LjAwM2MtLjA1OC0uMDI1LTEuMzI1LTEuMDItMi44MTYtMi4yMTNMNi4xMyAxNC4wOTVsLTEuNDItLjAwOS0xLjQxOC0uMDEtLjE5Ny0uMDkzYTEuMTM1IDEuMTM1IDAgMCAxLS41NTgtLjU1OGwtLjA5NC0uMTk3VjguMjg3bC4wODItLjE3M2MuMS0uMjE1LjMxLS40NDMuNS0uNTQ2LjE2NC0uMDkuNDI1LS4xNDUuNjczLS4xNDVoLjE3TDIuMDc0IDUuNjI1Qy45MjIgNC40NzIuOTcgNC40NzEgMS4wMiA0LjQ3Yy4wMTIgMCAuMDI2IDAgLjAyLS4wMloiIGZpbGw9IiNmZmYiLz48L3N2Zz4=);
 }
+.yt-player__mute.is-muted ~ .yt-player__volume {
+  width: 0;
+  overflow: hidden;
+  pointer-events: none;
+  margin-left: 0;
+}
 .yt-player__live {
   display: flex;
   align-items: center;
@@ -92,6 +98,82 @@
 .yt-player__live-icon {
   background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEiIGhlaWdodD0iMjEiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik05LjgxMiAzLjc0NWE3LjAwMyA3LjAwMyAwIDAgMC02LjMxMiA2Ljk3IDcuMDAzIDcuMDAzIDAgMCAwIDYuMzEyIDYuOTdWMTYuMjdhNS41OTcgNS41OTcgMCAwIDEtNC45MDYtNS41NTUgNS41OTcgNS41OTcgMCAwIDEgNC45MDYtNS41NTVWMy43NDVabTIuMzEzIDEyLjMyNmE1LjYgNS42IDAgMCAwIDAtMTAuNzE0VjMuOWE3LjAwNiA3LjAwNiAwIDAgMSAwIDEzLjYyOHYtMS40NThabS0xLjUxMyAxLjY0N2gtLjIyNGE2LjkwMSA2LjkwMSAwIDAgMCAuMjI0IDBaIiBmaWxsPSIjMjJBMDRDIi8+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik05LjgxMiA2LjU4YTQuMTkgNC4xOSAwIDAgMCAwIDguMjY4di0xLjQzN2EyLjc4NCAyLjc4NCAwIDAgMSAwLTUuMzk1VjYuNTgxWm0yLjMxMyA2LjM5M2EyLjc4IDIuNzggMCAwIDAgMS4xNTYtMi4yNiAyLjc4IDIuNzggMCAwIDAtMS4xNTYtMi4yNThWNi44NTJhNC4xOTEgNC4xOTEgMCAwIDEgMCA3LjcyNnYtMS42MDVaIiBmaWxsPSIjMjJBMDRDIi8+PGVsbGlwc2UgY3g9IjEwLjUiIGN5PSIxMC43NTUiIHJ4PSIxLjUiIHJ5PSIxLjUwMSIgZmlsbD0iIzIyQTA0QyIvPjwvc3ZnPg==);
   margin-right: 4px;
+}
+.yt-player__volume-wr {
+  display: flex;
+}
+.yt-player__volume {
+  -webkit-appearance: none;
+  width: 100px;
+  height: 4px;
+  border-radius: 4px;
+  margin: 6px 0 0 0;
+  margin-left: 8px;
+  transition: width 0.2s ease;
+}
+.yt-player__volume::-webkit-slider-thumb {
+  -webkit-appearance: none;
+}
+.yt-player__volume:focus {
+  outline: none;
+}
+.yt-player__volume::-ms-track {
+  width: 100%;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+.yt-player__volume::-webkit-slider-thumb {
+  border: 1px solid #000;
+  height: 18px;
+  width: 18px;
+  border-radius: 50%;
+  background: white;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -7px;
+}
+.yt-player__volume::-moz-range-thumb {
+  border: 1px solid #000;
+  height: 18px;
+  width: 18px;
+  border-radius: 50%;
+  background: white;
+  cursor: pointer;
+}
+.yt-player__volume::-ms-thumb {
+  border: 1px solid #000;
+  height: 18px;
+  width: 18px;
+  border-radius: 50%;
+  background: white;
+  cursor: pointer;
+}
+.yt-player__volume::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 4px;
+  background: transparent;
+  border-radius: 4px;
+  border: 1px solid #000;
+  cursor: pointer;
+}
+.yt-player__volume::-moz-range-track {
+  width: 100%;
+  height: 4px;
+  background: transparent;
+  border-radius: 4px;
+  border: 1px solid #000;
+  cursor: pointer;
+}
+.yt-player__volume::-ms-track {
+  width: 100%;
+  height: 4px;
+  background: transparent;
+  border-radius: 4px;
+  border: 1px solid #000;
+  cursor: pointer;
+  color: transparent;
 }
 
 /*# sourceMappingURL=style.css.map */
