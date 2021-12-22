@@ -95,8 +95,9 @@
     .is-volume-shown & {
        &:not(.is-muted) {
          ~ .yt-player__volume {
-           width: 100px;
+           width: 50px;
            overflow: visible;
+           margin-left: 8px;
          }
        }
     }
@@ -144,7 +145,7 @@
     height: $track-height;
     border-radius: 4px;
     margin: #{$track-height + 2}  0 0 0;
-    margin-left: 8px;
+    //margin-left: 8px;
     transition: width .2s ease;
     width: 0;
     overflow: hidden;
